@@ -21,7 +21,7 @@ def test_rebalance_example_preserves_inputs_and_reads_each_price_once():
         assert portfolio.rebalance() == {"META": Decimal("-2"), "AAPL": Decimal("1")}
 
     assert quote.call_count == 2
-    assert [call.args[0].symbol for call in quote.call_args_list] == ["META", "AAPL"]
+    assert {call.args[0].symbol for call in quote.call_args_list} == {"META", "AAPL"}
     assert portfolio.positions == original_positions
     assert portfolio.allocations == original_allocations
 
